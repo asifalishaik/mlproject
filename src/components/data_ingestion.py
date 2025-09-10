@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 
 from src.components.data_transformation import DataTransformation, DataTransformationConfig
+from src.components.model_trainer import ModelTrainer,ModelTrainerConfig
 
 @dataclass ## use it if you are only defining variables in the class.
 class DataIngestionCofig:
@@ -49,4 +50,7 @@ if __name__=="__main__":
     obj=DataIngestion()
     train_data_path, test_data_path=obj.initiate_data_ingestion()
     data_transformation = DataTransformation()
-    data_transformation.initate_data_transformation(train_data_path,test_data_path)
+    train_arr, test_arr,_ =data_transformation.initate_data_transformation(train_data_path,test_data_path)
+
+    modeltrainer=ModelTrainer()
+    print(modeltrainer.initate_model_trainer(train_arr,test_arr))
